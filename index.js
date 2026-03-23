@@ -76,9 +76,9 @@ const createManyPeople = async () => {
  * Find all people with a given name
  */
 const findPeopleByName = async (personName) => {
-  // Use regex to find names that contain the search string
-  return Person.find({ name: { $regex: personName, $options: 'i' } });
-  // The 'i' option makes it case-insensitive
+    // Use regex to find names that contain the search string
+    return Person.find({ name: { $regex: personName, $options: 'i' } });
+    // The 'i' option makes it case-insensitive
 };
 
 /**
@@ -138,12 +138,14 @@ const deletePersonById = async (personId) => {
     return Person.findByIdAndDelete(personId);
 };
 
+
 /**
  * Delete Many Documents with model.remove()
  * Delete all people named "Mary"
  */
 const deleteManyMary = async () => {
-    return Person.deleteMany({ name: 'Mary' });
+    // Delete people whose name STARTS WITH "Mary"
+    return Person.deleteMany({ name: { $regex: '^Mary', $options: 'i' } });
 };
 
 /**
